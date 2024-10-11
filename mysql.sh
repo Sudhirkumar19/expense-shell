@@ -40,6 +40,16 @@ echo -e "$G script started executing at: $N $(date)" | tee -a $LOG_FILE
 
 CHECK_ROOT
 
+dnf list installed mysql-server
+if [ $? -ne 0 ]
+    then
+        echo "mysql-server is not installed, going to install it..." | tee -a $LOG_FILE
+        dnf install mysql-server -y | tee -a $LOG_FILE
+        VALIDATE $? "Installing mysql-server"
+    else 
+        echo " mysql-server already installed, nothing to do..." | tee -a $LOG_FILE
+fi
+
 dnf install mysql-server -y &>>$LOG_FILE
 VALIDATE $? "Installing Mysql Server" 
 
@@ -49,7 +59,7 @@ VALIDATE $? "enabled mysql server"
 systemctl start mysqld &>>$LOG_FILE
 VALIDATE $? "starting of mysql server"
 
-mysql -h 172.31.31.130 -u root -pExpenseApp@1 -e 'show databases;'  &>>$LOG_FILE
+mysql -h 172.31.18.98 -u root -pExpenseApp@1 -e 'show databases;'  &>>$LOG_FILE
 if [ $? -ne 0 ] 
 then
     echo "MYSQL root password is not setup, setting now"&>>$LOG_FILE
