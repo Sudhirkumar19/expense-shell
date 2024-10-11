@@ -70,7 +70,7 @@ VALIDATE $? "dowloading zip backend application  code "
 
 cd /app
 VALIDATE $? "change directory "
-
+rm -rf /app/* # remove the existing files/code  for new files deployment
 unzip /tmp/backend.zip
 VALIDATE $? "Unzip backend code file "
 
