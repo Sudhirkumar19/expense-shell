@@ -40,19 +40,29 @@ echo -e "$G script started executing at: $N $(date)" | tee -a $LOG_FILE
 
 CHECK_ROOT
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>>$LOG_FILE
 VALIDATE $? "disabling default nodejs"
 
-dnf module enable nodejs:20 -y
+dnf module enable nodejs:20 -y &>>$LOG_FILE
 VALIDATE $? "enabling nodes:20"
 
-dnf install nodejs -y
+dnf install nodejs -y &>>$LOG_FILE
 VALIDATE $? "installing nodejs"
 
-useradd expense
-VALIDATE $? "creating expense user"
+id expense &>>$LOG_FILE
+if [ $? -ne 0 ]
+then
+    echo "user expense is not available"
+    useradd expense &>>$LOG_FILE
+    VALIDATE $? "creating expense user"
+else
+    echo "user is already exist"
+fi
 
-mkdir -p /app
+# useradd expense &>>$LOG_FILE
+# VALIDATE $? "creating expense user"
+
+mkdir -p /app &>>$LOG_FILE
 VALIDATE $? "create app directory"
 
 # mysql -h 172.31.18.98 -u root -pExpenseApp@1 -e 'show databases;'  &>>$LOG_FILE
