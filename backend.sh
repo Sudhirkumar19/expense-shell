@@ -65,6 +65,22 @@ fi
 mkdir -p /app &>>$LOG_FILE
 VALIDATE $? "create app directory"
 
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOG_FIL
+VALIDATE $? "dowloading zip backend application  code "
+
+cd /app
+VALIDATE $? "change directory "
+
+unzip /tmp/backend.zip
+VALIDATE $? "Unzip backend code file "
+
+
+
+
+
+
+
+
 # mysql -h 172.31.18.98 -u root -pExpenseApp@1 -e 'show databases;'  &>>$LOG_FILE
 # if [ $? -ne 0 ] 
 # then
