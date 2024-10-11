@@ -79,6 +79,27 @@ npm install &>>$LOG_FILE # to activate , install build file / dependencies
 cp /home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service
 VALIDATE  $? "copying backend.service "
 
+dnf install mysql -y
+VALIDATE $? "MYsql installation"
+
+mysql -h 172.31.18.98 -u root -pExpenseApp@1 < /app/schema/backend.sql
+VALIDATE $? "Schema loading"
+
+systemctl daemon-reload &>>$LOG_FILE
+VALIDATE $? "daemon realod"
+
+systemctl start backend &>>$LOG_FILE
+VALIDATE $? "start backend"
+
+systemctl enable backend &>>$LOG_FILE
+VALIDATE $? "enable backend"
+
+systemctl restart backend &>>$LOG_FILE
+VALIDATE $? "restart backend"
+
+
+
+
 
 
 
