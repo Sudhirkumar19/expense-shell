@@ -71,8 +71,16 @@ VALIDATE $? "dowloading zip backend application  code "
 cd /app
 VALIDATE $? "change directory "
 rm -rf /app/* # remove the existing files/code  for new files deployment
-unzip /tmp/backend.zip
+unzip /tmp/backend.zip &>>$LOG_FILE
 VALIDATE $? "Unzip backend code file "
+
+npm install &>>$LOG_FILE # to activate , install build file / dependencies
+
+cp /home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service
+VALIDATE  $? "copying backend.service is success"
+
+
+
 
 
 
