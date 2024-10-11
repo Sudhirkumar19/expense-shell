@@ -82,7 +82,7 @@ VALIDATE  $? "copying backend.service "
 dnf install mysql -y &>>$LOG_FILE
 VALIDATE $? "MYsql installation"
 
-mysql -h 172.31.18.98 -uroot -pExpenseApp@1 < /app/schema/backend.sql
+mysql -h 172.31.18.98 -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOG_FILE
 VALIDATE $? "Schema loading"
 
 systemctl daemon-reload &>>$LOG_FILE
