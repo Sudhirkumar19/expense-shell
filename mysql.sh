@@ -50,8 +50,7 @@ if [ $? -ne 0 ]
         echo " mysql-server already installed, nothing to do..." | tee -a $LOG_FILE
 fi
 
-dnf install mysql-server -y &>>$LOG_FILE
-VALIDATE $? "Installing Mysql Server" 
+
 
 systemctl enable mysqld &>>$LOG_FILE
 VALIDATE $? "enabled mysql server"
