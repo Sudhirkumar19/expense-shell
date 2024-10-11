@@ -61,8 +61,8 @@ VALIDATE $? "change directory "
 unzip /tmp/frontend.zip &>>$LOG_FILE
 VALIDATE $? "Unzip backend code file "
 
-cp /home/ec2-user/expense-shell/expense.conf /etc/nginx/default.d/expense.conf 
-VALIDATE  $? "copying frontend config "
+# cp /home/ec2-user/expense-shell/expense.conf /etc/nginx/default.d/expense.conf 
+# VALIDATE  $? "copying frontend config "
 
 systemctl restart nginx
 VALIDATE  $? "restarting nginx "
