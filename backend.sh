@@ -77,7 +77,7 @@ VALIDATE $? "Unzip backend code file "
 npm install &>>$LOG_FILE # to activate , install build file / dependencies
 
 cp /home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service
-VALIDATE  $? "copying backend.service is success"
+VALIDATE  $? "copying backend.service "
 
 
 
