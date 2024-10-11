@@ -52,11 +52,11 @@ VALIDATE $? "installing nodejs"
 id expense &>>$LOG_FILE
 if [ $? -ne 0 ]
 then
-    echo "user expense is not available"
+    echo -e "$G user expense is not available $G creating $N"
     useradd expense &>>$LOG_FILE
     VALIDATE $? "creating expense user"
 else
-    echo "user is already exist"
+    echo -e "$G user is already exist $Y skipping it $N"
 fi
 
 # useradd expense &>>$LOG_FILE
